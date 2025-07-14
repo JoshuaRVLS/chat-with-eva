@@ -30,7 +30,7 @@ export const completion = async function (
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer yourtokenhere`,
         "Content-Type": "application/json",
         "X-Title": "Chat with Eva",
       },
