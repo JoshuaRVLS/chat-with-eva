@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chat With Eva - Frontend AI
 
-## Getting Started
+![Preview Proyek](https://via.placeholder.com/800x400?text=Chat+Dengan+Eva+Preview) <!-- Ganti dengan screenshot asli -->
 
-First, run the development server:
+Antarmuka chat AI yang realistis untuk berinteraksi dengan "Eva" yang memiliki pola bicara, perilaku, dan kepribadian alami layaknya manusia.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Fitur Utama
+
+- **Kepribadian Realistis**: Eva merespons dengan gaya bicara, ekspresi, dan kedalaman emosi seperti manusia
+- **Integrasi OpenRouter**: Terhubung dengan berbagai model AI melalui API OpenRouter
+- **Respons Dinamis**: Balasan yang memahami konteks percakapan
+- **Kecerdasan Emosional**: Eva menyesuaikan nada bicara berdasarkan situasi
+- **Indikator Mengetik**: Simulasi kecepatan respons yang alami
+- **Memori Percakapan**: Menyimpan riwayat chat untuk diskusi yang koheren
+
+## Panduan Instalasi
+
+### Persyaratan
+
+- Node.js (versi 16 atau lebih baru)
+- npm atau yarn
+- API key dari OpenRouter
+
+### Cara Install
+
+1. Clone repositori:
+
+   ```bash
+   git clone https://github.com/JoshuaRVLS/chat-with-eva.git
+   cd chat-with-eva
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # atau
+   yarn install
+   ```
+
+3. Buat file `.env` di direktori utama dengan API key OpenRouter:
+
+   ```
+   VITE_OPENROUTER_API_KEY=masukkan_api_key_anda_disini
+   ```
+
+4. Jalankan server pengembangan:
+   ```bash
+   npm run dev
+   # atau
+   yarn dev
+   ```
+
+## Konfigurasi
+
+Sesuaikan kepribadian Eva dengan mengubah variabel lingkungan ini:
+
+```
+VITE_AI_PERSONA=Eva adalah asisten AI yang ramah, penuh rasa ingin tahu, dan berkarakter hangat...
+VITE_TYPING_SPEED_VARIATION=0.5  # Atur keacakan kecepatan mengetik (0-1)
+VITE_RESPONSE_VARIABILITY=0.7    # Atur kreativitas respons (0-1)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Sifat Kepribadian
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Eva dirancang dengan karakteristik utama:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Nada bicara hangat dan empatik
+- Pola bicara alami dengan kata-kata penyerta sesekali
+- Respons emosional yang kontekstual
+- Gaya percakapan yang menarik dan penuh rasa ingin tahu
+- Kepribadian adaptif berdasarkan interaksi pengguna
 
-## Learn More
+````
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+Buat versi produksi:
+```bash
+npm run build
+````
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Deploy folder `dist` ke layanan hosting pilihan Anda.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Lisensi
 
-## Deploy on Vercel
+MIT License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Kontribusi
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pull request diterima. Untuk perubahan besar, silakan buat issue terlebih dahulu untuk didiskusikan.
+
+---
+
+**Catatan**: Proyek ini membutuhkan API key OpenRouter. Pastikan Anda mematuhi ketentuan layanan OpenRouter saat menggunakan antarmuka ini.
