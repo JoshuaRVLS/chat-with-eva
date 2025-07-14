@@ -1,103 +1,200 @@
+"use client";
+
 import Image from "next/image";
+import {
+  FormEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { models, completion } from "./utils/openai";
+import Card from "./components/Card";
+import type { Message } from "./components/types/types";
+import Settings from "./components/Settings";
+import { useSettings } from "./stores/useSettings";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [text, setText] = useState<string>("");
+  const [model, setModel] = useState<number>(0);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const {
+    topP,
+    topK,
+    maxTokens,
+    temperature,
+    presencePenalty,
+    frequencyPenalty,
+    repetitionPenalty,
+  } = useSettings();
+  const msgRef = useRef<HTMLDivElement>(null);
+  const modelMenuRef = useRef<HTMLDivElement>(null);
+  const MemoizedCard = memo(Card);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    // CLose modal when outside clicked but onClick is not working?
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        openModal &&
+        modelMenuRef.current &&
+        !modelMenuRef.current.contains(event.target as Node)
+      ) {
+        setOpenModal(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openModal]);
+
+  useEffect(() => {
+    const messages = localStorage.getItem("messages");
+    const model = localStorage.getItem("model");
+    if (model) {
+      setModel(parseInt(model));
+    }
+    if (messages) {
+      setMessages(JSON.parse(messages));
+      msgRef.current?.scrollTo(0, msgRef.current.scrollHeight);
+    }
+  }, []);
+
+  const addItem = async ({ role, content, fromUser }: Message) => {
+    setMessages((prev) => {
+      localStorage.setItem(
+        "messages",
+        JSON.stringify([
+          ...prev,
+          { role: role, content: content, fromUser: fromUser },
+        ])
+      );
+      return [...prev, { role: role, content: content, fromUser: fromUser }];
+    });
+    msgRef.current?.scrollTo(0, msgRef.current.scrollHeight);
+  };
+
+  const handleModelChange = useCallback((model: number) => {
+    setModel(model);
+    localStorage.setItem("model", model.toString());
+  }, []);
+
+  const submit = async (e: FormEvent) => {
+    setLoading(true);
+    e.preventDefault();
+    await addItem({ role: "user", content: text, fromUser: true });
+    setText("");
+    const response = await completion(
+      models[model],
+      text,
+      messages,
+      topP,
+      topK,
+      maxTokens,
+      temperature,
+      presencePenalty,
+      frequencyPenalty,
+      repetitionPenalty
+    );
+    await addItem({
+      role: "user",
+      content: response.choices[0].message.content,
+      fromUser: false,
+    });
+    setLoading(false);
+    msgRef.current?.scrollTo(0, msgRef.current.scrollHeight);
+  };
+
+  const renderedMessages = useMemo(() => {
+    return messages.map((msg, idx) => (
+      <MemoizedCard
+        key={idx}
+        idx={idx}
+        msg={msg}
+        messages={messages}
+        setMessages={setMessages}
+        setLoading={setLoading}
+        addItem={addItem}
+        model={model}
+      />
+    ));
+  }, [messages, model]);
+
+  return (
+    <div className="w-full h-full flex justify-center items-center overflow-hidden">
+      <div className="flex flex-col w-full justify-center items-center h-full gap-2 p-2 rounded-md">
+        <div
+          ref={msgRef}
+          className="bg-gray-900 w-full md:w-[70%] rounded-lg scrollbar-hide overflow-scroll shadow font-light h-[40rem] gap-8 flex flex-col p-4 md:p-12"
+        >
+          {renderedMessages}
+          {loading && (
+            <div className="flex p-2 bg-white gap-3 items-center">
+              <Image
+                src="/cewek.jpeg"
+                alt="avatar"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <span className="text-right font-bold text-gray-500">
+                Mengetik
+              </span>
+            </div>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+        <form onSubmit={submit} className="w-full relative">
+          <textarea
+            required
+            onChange={(e) => setText(e.target.value)}
+            value={text}
+            placeholder="Type here"
+            className="p-4 pr-20 text-wrap h-fit w-full flex items-center border resize-none"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <button
+            type="submit"
+            className="absolute right-6 top-0 bottom-0 cursor-pointer"
+          >
+            Send
+          </button>
+        </form>
+        <div className="flex gap-2 items-center">
+          {models[model]} {""}
+          <button onClick={() => setOpenModal(true)} className="btn">
+            Change
+          </button>
+          <Settings />
+        </div>
+      </div>
+
+      {openModal && (
+        <div className="modal">
+          <div
+            ref={modelMenuRef}
+            className={` ${
+              !openModal ? "opacity-0" : "opacity-100"
+            } relative bg-white w-fit border transition h-fit p-8 flex flex-col pt-8 gap-2 shadow`}
+          >
+            {models.map((modelId, idx) => (
+              <span
+                key={idx}
+                onClick={() => {
+                  handleModelChange(idx);
+                }}
+                className={`cursor-pointer hover:opacity-70 ${
+                  model === idx ? "font-bold" : ""
+                }`}
+              >
+                {modelId}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

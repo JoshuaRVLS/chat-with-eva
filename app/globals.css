@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tailwind-scrollbar-hide/v4";
 
 :root {
   --background: #ffffff;
@@ -12,15 +13,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
+  @apply w-dvw h-dvh;
   background: var(--background);
   color: var(--foreground);
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.modal {
+  @apply absolute top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center transition;
+}
+
+.btn {
+  @apply shadow bg-black text-white p-2 rounded-md cursor-pointer hover:opacity-70;
 }
