@@ -129,24 +129,6 @@ const Card = ({
               em: ({ node, ...props }) => (
                 <em style={{ fontStyle: "italic", color: "gray" }} {...props} />
               ),
-              code({ node, className, children, ...props }) {
-                // Removed `inline` from destructuring
-                const match = /language-(\w+)/.exec(className || "");
-                return match ? (
-                  <SyntaxHighlighter
-                    style={dracula}
-                    language={match[1]}
-                    PreTag="div"
-                    {...props}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
-                ) : (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                );
-              },
             } as Components
           }
         >

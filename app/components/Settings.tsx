@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSettings } from "../stores/useSettings";
 import ImportButton from "./ImportButton";
 import ExportButton from "./ExportButton";
+import ClearButton from "./ClearButton";
 
 const Settings = () => {
   const {
@@ -142,11 +143,12 @@ const Settings = () => {
               />
             </div>
             <div className="flex gap-2">
+              <ImportButton />
+              <ExportButton />
+              <ClearButton />
               <button onClick={save} className="btn">
                 Save
               </button>
-              <ImportButton />
-              <ExportButton />
               <button onClick={() => setOpenModal(false)} className="btn">
                 Cancel
               </button>
