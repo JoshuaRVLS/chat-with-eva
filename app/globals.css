@@ -1,32 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "tailwind-scrollbar-hide/v4";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #121212;
+  --foreground: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-primary-background: var(--background);
+  --color-primary-text: var(--foreground);
+  --color-disabled: #b0b0b0;
+  --color-success: #4caf50;
+  --color-warning: #ffc107;
+  --color-error: #ff5252;
+  --color-info: #2196f3;
+  --color-secondary-text: #e0e0e0;
+  --color-primary-button: #00c4b3;
+  --color-primary-hover-state: #009688;
+  --color-primary-active-state: #006d63;
+  --color-secondary-button: #a45cff;
+  --color-secondary-hover-state: #8d39ff;
+  --color-borders: #2d2d2d;
+  --color-for-dark-surface: #383838;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-roboto: "Roboto", sans-serif;
 }
 
 body {
-  @apply w-dvw h-dvh;
+  @apply font-roboto w-dvw h-dvh;
   background: var(--background);
   color: var(--foreground);
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-.modal {
-  @apply absolute top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center transition;
+.center {
+  @apply flex justify-center items-center w-full h-dvh;
+}
+
+.form {
+  @apply flex flex-col gap-2 border border-borders p-4;
+}
+
+.input {
+  /* Responsive modern design input */
+  @apply p-4 mt-1 rounded-lg border border-borders focus:outline-none focus:ring-2 focus:ring-borders;
 }
 
 .btn {
-  @apply shadow bg-black text-white p-2 rounded-md cursor-pointer hover:opacity-70;
+  @apply cursor-pointer p-2 rounded-lg bg-primary-button text-primary-text font-semibold hover:bg-primary-active-state focus:outline-none focus:ring-2 focus:ring-borders;
+}
+
+.title {
+  @apply text-3xl font-black mb-2 text-center text-secondary-text;
+}
+
+.link {
+  @apply cursor-pointer text-secondary-text hover:underline text-center;
+}
+
+.error {
+  @apply text-red-500;
 }
