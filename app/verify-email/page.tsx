@@ -67,7 +67,9 @@ const VerifyEmailComponent = () => {
 };
 
 export default function VerifyEmail() {
-  <Suspense fallback={<div>Loading...</div>}>
-    <VerifyEmailComponent />
-  </Suspense>;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailComponent />
+    </Suspense>
+  );
 }
