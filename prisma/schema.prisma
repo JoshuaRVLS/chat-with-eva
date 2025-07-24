@@ -19,11 +19,20 @@ model User {
   username String @unique
   email String @unique
   password String
+  profileImage UserProfileImage?  
   verificationToken String?
   verificationTokenExpires DateTime?
   verified Boolean @default(false)
   charCreated Character[]
   charUsed CharacterUsed[]
+}
+
+model UserProfileImage {
+  id String @id @default(cuid()) @map("_id")
+  mimetype String
+  data Bytes
+  user User @relation(fields: [userId], references: [id])
+  userId String @unique
 }
 
 model Character {
