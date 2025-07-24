@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
+import { generateProfileImage } from "@/app/utils/image";
 
 const userSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters long"),
@@ -32,12 +33,22 @@ export const POST = async (req: Request) => {
     }
 
     const verificationToken = crypto.randomBytes(32).toString("hex");
-    const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+    const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours\
+
+    const profileImageBuffer = await generateProfileImage(
+      userData.username.substring(0, 2)
+    );
 
     const userCreated = await db.user.create({
       data: {
         username: userData.username,
         email: userData.email,
+        profileImage: {
+          create: {
+            data: profileImageBuffer,
+            mimetype: "image/png",
+          },
+        },
         password: await bcrypt.hash(userData.password, 10),
         verificationToken,
         verificationTokenExpires,
