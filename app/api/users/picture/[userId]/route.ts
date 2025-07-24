@@ -21,6 +21,8 @@ export async function GET(
       headers: {
         "Content-Type": user.profileImage.mimetype,
         "Cache-Control": "public, max-age=604800", // 1 week cache
+        "Content-Disposition": "inline",
+        Vary: "Accept",
       },
     });
   } catch (error) {
