@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Bitcount+Prop+Single:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "tailwind-scrollbar-hide/v4";
 
@@ -26,6 +26,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-roboto: "Roboto", sans-serif;
+  --font-bitcount: "Bitcount Prop Single", system-ui;
 }
 
 body {
@@ -51,7 +52,7 @@ body {
 }
 
 .btn {
-  @apply cursor-pointer p-2 rounded-lg bg-primary-button text-primary-text font-semibold hover:bg-primary-active-state focus:outline-none focus:ring-2 focus:ring-borders;
+  @apply cursor-pointer text-sm p-2 border-borders rounded-lg bg-primary-button text-primary-text font-light hover:bg-primary-active-state focus:outline-none focus:ring-2 focus:ring-borders;
 }
 
 .title {
@@ -64,4 +65,12 @@ body {
 
 .error {
   @apply text-red-500;
+}
+
+.nav {
+  @apply fixed top-0 left-0 right-0 h-16 bg-primary-background border-borders border shadow flex p-4 items-center justify-between;
+}
+
+.btn-outline {
+  @apply cursor-pointer text-sm p-2 font-roboto border-borders border shadow rounded-lg bg-transparent text-primary-text font-extralight  focus:outline-none focus:ring-2 focus:ring-borders;
 }
