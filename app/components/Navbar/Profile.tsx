@@ -1,7 +1,6 @@
 "use client";
 
 import { AuthContext } from "@/app/providers/AuthProvider";
-import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import Reveal from "../Animations/Reveal";
 import { signOut } from "next-auth/react";
@@ -32,14 +31,13 @@ const Profile = () => {
 
   return (
     <div>
-      <Image
+      <img
         onClick={() => setMenuOpen(!menuOpen)}
         src={`/api/users/picture/${user?.id}`}
         alt={`Your Profile`}
         width={40}
         height={40}
         className="object-cover rounded-full"
-        unoptimized
       />
 
       {menuOpen && (
