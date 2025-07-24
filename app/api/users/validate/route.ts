@@ -35,7 +35,7 @@ export const POST = async (req: Request) => {
     if (!user.verified) {
       return NextResponse.json(
         {
-          success: true,
+          success: false,
           message: "Tolong aktivasi akun terlebih dahulu",
           userId: user.id,
         },
