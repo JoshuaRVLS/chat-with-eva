@@ -4,12 +4,11 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = await params;
     const user = await db.user.findUnique({
-      where: { id },
+      where: { id: params.id },
       select: { profileImage: true },
     });
 
