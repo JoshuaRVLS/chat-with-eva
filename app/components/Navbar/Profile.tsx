@@ -4,6 +4,7 @@ import { AuthContext } from "@/app/providers/AuthProvider";
 import React, { useContext, useEffect, useState } from "react";
 import Reveal from "../Animations/Reveal";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -31,7 +32,7 @@ const Profile = () => {
 
   return (
     <div>
-      <img
+      <Image
         onClick={() => setMenuOpen(!menuOpen)}
         src={`/api/users/picture/${user?.id}`}
         alt={`Your Profile`}

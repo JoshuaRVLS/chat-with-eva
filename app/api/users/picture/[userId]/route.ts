@@ -7,8 +7,9 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const user = await db.user.findUnique({
-      where: { id: (await params).id },
+      where: { id },
       select: { profileImage: true },
     });
 
