@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 type UserInput = {
@@ -6,7 +6,7 @@ type UserInput = {
   password: string;
 };
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     Credentials({
       credentials: {},
@@ -60,7 +60,7 @@ const handler = NextAuth({
     },
     session: async ({ session, token }) => {
       if (token) {
-        session.user = token;
+        session.user = token.user as any;
       }
       return session;
     },
@@ -69,6 +69,8 @@ const handler = NextAuth({
     signIn: "/login", // Custom sign-in page
     error: "/login", // Redirect to login page on errors
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
