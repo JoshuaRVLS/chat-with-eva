@@ -1,0 +1,50 @@
+"use client";
+
+import React from "react";
+import Reveal from "../Animations/Reveal";
+import { signOut } from "next-auth/react";
+import {
+  FaLine,
+  FaMask,
+  FaSignOutAlt,
+  FaUserFriends,
+  FaUserPlus,
+} from "react-icons/fa";
+import Link from "next/link";
+
+const OpenMenu = () => {
+  return (
+    <Reveal direction="up">
+      <div className="relative -z-10 select-none">
+        <div className="nav-menu">
+          <div className="nav-item">
+            <FaUserPlus className="icon" />
+            <Link href="/create_character" className="nav-link w-full">
+              Create Character
+            </Link>
+          </div>
+          <div className="nav-item">
+            <FaUserFriends className="icon" />
+            <span className="nav-link w-full">My Characters</span>
+          </div>
+          <div className="nav-item">
+            <FaLine className="icon" />
+            <span className="nav-link w-full">My Chats</span>
+          </div>
+          <div className="nav-item">
+            <FaMask className="icon" />
+            <span className="nav-link w-full">My Persona</span>
+          </div>
+          <div className="nav-item mt-2 btn-outline">
+            <FaSignOutAlt className="icon" />
+            <span className="nav-link w-full" onClick={() => signOut()}>
+              Sign Out
+            </span>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  );
+};
+
+export default OpenMenu;

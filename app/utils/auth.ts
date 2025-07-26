@@ -32,10 +32,10 @@ export const authOptions: NextAuthOptions = {
             throw new Error(data.message);
           }
 
-          const { userId } = data;
           console.log("Logged in");
           return {
-            id: userId as string,
+            id: data.userId as string,
+            username: data.username as string,
           };
         } catch (error) {
           if (error instanceof Error) {

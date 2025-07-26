@@ -12,9 +12,12 @@ const Navbar = () => {
   return (
     <Reveal direction="down">
       <div className="nav">
-        <h1 className="font-bitcount font-normal tracking-widest text-primary-text">
-          JChatAI
-        </h1>
+        <Link
+          href="/"
+          className="font-bitcount text-3xl font-normal tracking-widest text-primary-text"
+        >
+          JChatAI<sup>BETA</sup>
+        </Link>
         <Search />
         {user ? (
           <AuthenticatedMenu />

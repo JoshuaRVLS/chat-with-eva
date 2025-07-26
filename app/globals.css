@@ -30,12 +30,20 @@
 }
 
 body {
-  @apply font-roboto w-dvw h-dvh;
+  @apply font-bitcount w-dvw h-dvh p-0;
   background: var(--background);
+  overflow-x: hidden;
   color: var(--foreground);
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+}
+
+ul {
+  @apply list-disc pl-4;
+}
+
+li {
+  @apply text-gray-400 font-light;
 }
 
 .center {
@@ -52,15 +60,15 @@ body {
 }
 
 .btn {
-  @apply cursor-pointer text-sm p-2 border-borders rounded-lg bg-primary-button text-primary-text font-light hover:bg-primary-active-state focus:outline-none focus:ring-2 focus:ring-borders;
+  @apply cursor-pointer p-2 font-semibold border-borders rounded-lg bg-primary-button text-primary-text hover:bg-primary-active-state focus:outline-none focus:ring-2 focus:ring-borders;
 }
 
 .title {
-  @apply text-3xl font-black mb-2 text-center text-secondary-text;
+  @apply text-xl font-black mb-2 text-center text-secondary-text;
 }
 
 .link {
-  @apply cursor-pointer text-secondary-text hover:underline text-center;
+  @apply cursor-pointer text-secondary-text hover:underline text-center text-nowrap;
 }
 
 .error {
@@ -68,9 +76,29 @@ body {
 }
 
 .nav {
-  @apply fixed top-0 left-0 right-0 h-16 bg-primary-background border-borders border shadow flex p-4 items-center justify-between;
+  @apply z-50 fixed top-0 left-0 right-0 h-20 bg-primary-background border-borders border shadow flex p-4 items-center justify-between;
 }
 
 .btn-outline {
   @apply cursor-pointer text-sm p-2 font-roboto border-borders border shadow rounded-lg bg-transparent text-primary-text font-extralight  focus:outline-none focus:ring-2 focus:ring-borders;
+}
+
+.nav-menu {
+  @apply absolute rounded-lg backdrop-blur-xl flex flex-col justify-start gap-2 min-w-fit top-2 right-0 p-6 border-borders bg-primary-background/40 border font-light;
+}
+
+.nav-item {
+  @apply cursor-pointer flex gap-2 items-center;
+}
+
+.nav-link {
+  @apply text-nowrap font-light hover:text-secondary-button text-lg;
+}
+
+.icon {
+  @apply size-6;
+}
+
+.card {
+  @apply flex relative md:fixed flex-col gap-2 border border-borders p-4 rounded-lg shadow w-full md:w-52 h-80 md:justify-start;
 }

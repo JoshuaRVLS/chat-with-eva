@@ -46,7 +46,12 @@ export const POST = async (req: Request) => {
     }
 
     return NextResponse.json(
-      { success: true, message: "Login berhasil", userId: user.id },
+      {
+        success: true,
+        message: "Login berhasil",
+        userId: user.id,
+        username: user.username,
+      },
       {
         status: 200,
       }
