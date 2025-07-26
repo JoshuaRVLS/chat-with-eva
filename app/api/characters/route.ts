@@ -34,6 +34,7 @@ export const POST = async (req: Request) => {
             name: image.name,
           },
         },
+        scenario: scenario as string,
       },
     });
     return NextResponse.json({
@@ -45,4 +46,14 @@ export const POST = async (req: Request) => {
   }
 };
 
-export const GET = async (req: Request) => {};
+export const GET = async (req: Request) => {
+  try {
+    const characters = await db.character.findMany({
+      include: { author: true, photo: true },
+    });
+    console.log(characters);
+    return NextResponse.json({ success: true, data: characters });
+  } catch (error) {
+    console.log(error);
+  }
+};

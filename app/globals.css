@@ -80,7 +80,7 @@ li {
 }
 
 .btn-outline {
-  @apply cursor-pointer text-sm p-2 font-roboto border-borders border shadow rounded-lg bg-transparent text-primary-text font-extralight  focus:outline-none focus:ring-2 focus:ring-borders;
+  @apply transition hover:shadow hover:ring-1 ring-borders cursor-pointer text-sm p-2 font-roboto border-borders border shadow rounded-lg bg-transparent text-primary-text font-extralight  focus:outline-none focus:ring-2 focus:ring-borders;
 }
 
 .nav-menu {
@@ -100,5 +100,5 @@ li {
 }
 
 .card {
-  @apply flex relative md:fixed flex-col gap-2 border border-borders p-4 rounded-lg shadow w-full md:w-52 h-80 md:justify-start;
+  @apply transition hover:shadow hover:scale-105 cursor-pointer flex relative md:fixed flex-col gap-2 border border-borders p-4 rounded-lg shadow w-full md:w-52 h-96 max-h-96 justify-between;
 }

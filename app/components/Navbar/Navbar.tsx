@@ -18,7 +18,7 @@ const Navbar = () => {
         >
           JChatAI<sup>BETA</sup>
         </Link>
-        <Search />
+        {/* <Search /> */}
         {user ? (
           <AuthenticatedMenu />
         ) : (

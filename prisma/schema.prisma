@@ -25,6 +25,7 @@ model User {
   verified Boolean @default(false)
   charCreated Character[]
   chats Chat[]
+  comments Comment[]
 }
 
 model UserProfileImage {
@@ -40,6 +41,7 @@ model Character {
   name String 
   persona String 
   bio String
+  scenario String
   introMessage String
   author User @relation(fields: [authorId], references: [id])
   authorId String
@@ -47,6 +49,18 @@ model Character {
   photo CharacterImage?
   tag CharacterTag? @relation(fields: [tagId], references: [id])
   tagId String?
+  comments Comment[]
+}
+
+model Comment {
+  id String @id @default(cuid()) @map("_id")
+  content String 
+  author User @relation(fields: [authorId], references: [id])
+  authorId String
+  character Character @relation(fields: [characterId], references: [id])
+  characterId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model CharacterTag {
@@ -80,3 +94,4 @@ model Message {
   chat Chat @relation(fields: [chatId], references: [id])
   chatId String 
 }
+

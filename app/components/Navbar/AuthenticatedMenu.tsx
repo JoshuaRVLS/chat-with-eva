@@ -6,7 +6,7 @@ import Profile from "./Profile";
 const AuthenticatedMenu = () => {
   return (
     <div className="flex gap-2 items-center">
-      <Link className="rounded-full btn-outline" href={"/"}>
+      <Link className="rounded-full btn-outline" href={"/create_character"}>
         Create Character
       </Link>
       <Profile />

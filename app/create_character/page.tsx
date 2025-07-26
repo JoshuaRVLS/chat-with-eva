@@ -112,7 +112,7 @@ const page = () => {
             onChange={(e) => setCharacterAlias(e.target.value)}
             type="text"
             placeholder="Character Alias"
-            className="input"
+            className="input scrollbar-hide"
           />
           <ul>
             <li>Nama panggilan buat karakter. OPTIONAL</li>
@@ -127,7 +127,7 @@ const page = () => {
             required
             onChange={(e) => setCharacterBio(e.target.value)}
             placeholder="Deskripsi tentang bot lu"
-            className="input resize-none h-52"
+            className="input resize-none h-52 scrollbar-hide"
           />
           <ul>
             <li>
@@ -145,7 +145,7 @@ const page = () => {
             value={characterPersona}
             onChange={(e) => setCharacterPersona(e.target.value)}
             placeholder="Persona character "
-            className="input resize-none h-52"
+            className="input resize-none h-52 scrollbar-hide"
           />
           <ul>
             <li>
@@ -164,7 +164,7 @@ const page = () => {
             value={scenario}
             onChange={(e) => setScenario(e.target.value)}
             placeholder="Scenario buat AI"
-            className="input resize-none h-52"
+            className="input resize-none h-52 scrollbar-hide"
           />
           <ul>
             <li>
@@ -186,7 +186,7 @@ const page = () => {
             value={initialMessage}
             onChange={(e) => setInitialMessage(e.target.value)}
             placeholder="Initial Message"
-            className="input resize-none h-52"
+            className="input resize-none h-52 scrollbar-hide"
           />
           <ul>
             <li>
