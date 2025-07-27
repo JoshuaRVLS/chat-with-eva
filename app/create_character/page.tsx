@@ -220,6 +220,7 @@ const page = () => {
         <div className="w-1/2 lg:w-full">
           {user && (
             <CharacterCard
+              className="md:fixed"
               authorName={user!.username}
               characterName={characterName}
               image={image}

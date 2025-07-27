@@ -7,6 +7,29 @@
   --foreground: #ffffff;
 }
 
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: none;
+  scrollbar-color: #8f54a0 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #8f54a0;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}
 @theme inline {
   --color-primary-background: var(--background);
   --color-primary-text: var(--foreground);
@@ -100,5 +123,5 @@ li {
 }
 
 .card {
-  @apply transition hover:shadow hover:scale-105 cursor-pointer flex relative md:fixed flex-col gap-2 border border-borders p-4 rounded-lg shadow w-full md:w-52 h-96 max-h-96 justify-between;
+  @apply transition hover:shadow cursor-pointer flex relative flex-col gap-2 border border-borders p-4 rounded-lg shadow w-full md:w-52 h-96 max-h-96 justify-between;
 }

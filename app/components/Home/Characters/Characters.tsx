@@ -24,24 +24,27 @@ const Characters = () => {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3">
-      {data.map((character) => (
-        <Reveal key={character.id}>
-          <CharacterCard
-            characterName={character.name}
-            image={
-              character.photo?.data
-                ? `data:${character.photo.mimetype};base64,${Buffer.from(
-                    Object.values(character.photo.data)
-                  ).toString("base64")}`
-                : null
-            }
-            characterId={character.id}
-            characterBio={character.bio}
-            authorName={character.author.username}
-          />
-        </Reveal>
-      ))}
+    <div className="flex flex-col gap-4">
+      <h1 className="text-3xl">Community Characters</h1>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {data.map((character) => (
+          <Reveal key={character.id}>
+            <CharacterCard
+              characterName={character.name}
+              image={
+                character.photo?.data
+                  ? `data:${character.photo.mimetype};base64,${Buffer.from(
+                      Object.values(character.photo.data)
+                    ).toString("base64")}`
+                  : null
+              }
+              characterId={character.id}
+              characterBio={character.bio}
+              authorName={character.author.username}
+            />
+          </Reveal>
+        ))}
+      </div>
     </div>
   );
 };

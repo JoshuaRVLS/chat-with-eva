@@ -10,12 +10,14 @@ const CharacterCard = ({
   characterBio,
   authorName,
   characterId,
+  className,
 }: {
   characterName: string;
   image: File | Blob | string | null;
   characterBio: string;
   authorName: string;
   characterId?: string;
+  className?: string;
 }) => {
   const [imageUrl, setImageUrl] = useState<string | null>("");
   const router = useRouter();
@@ -44,7 +46,7 @@ const CharacterCard = ({
   }, [image]);
 
   return (
-    <div className="card">
+    <div className={`card ${className}`}>
       <div className="flex flex-col gap-1 overflow-hidden">
         <span>{characterName}</span>
         <div className="w-full">

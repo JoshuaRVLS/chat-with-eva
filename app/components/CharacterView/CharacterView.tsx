@@ -6,6 +6,7 @@ import Image from "next/image";
 import React from "react";
 import Dropdown from "../Dropdown/Dropdown";
 import Comments from "../Comments/Comments";
+import { useRouter } from "next/navigation";
 
 const CharacterView = ({ id }: { id: string }) => {
   const { isPending, error, data } = useQuery<
@@ -21,11 +22,36 @@ const CharacterView = ({ id }: { id: string }) => {
       ),
   });
 
+  const router = useRouter();
+
   if (isPending)
     return <p className="text-center pt-24">Loading Character...</p>;
   if (error) return <p>{error.message}</p>;
 
-  const startChat = async () => {};
+  const startChat = async () => {
+    try {
+      const response = await fetch("/api/chats", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          characterId: id,
+          userId: data.author.id,
+        }),
+      });
+      if (!response.ok) {
+        console.log(response);
+        return;
+      }
+
+      const { chat } = await response.json();
+
+      router.push(`/chat/${chat.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="pt-24 mt-8 px-6 flex flex-col lg:flex-row gap-4">
