@@ -28,7 +28,11 @@ const History = () => {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div className="flex flex-col gap-4 mb-12  h-full w-full">
+    <div
+      className={`"flex flex-col gap-4 mb-12  h-full w-full ${
+        !data.length && "hidden"
+      }`}
+    >
       <h1 className="text-3xl">Continue Chat</h1>
       <div className="flex gap-3 overflow-x-scroll">
         {data.map((chat) => (
