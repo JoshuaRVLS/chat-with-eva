@@ -1,16 +1,21 @@
 import { registerFont, createCanvas } from "canvas";
 import path from "path";
-import { readFileSync } from "fs";
-
-// Register fonts (do this once at module level)
-registerFont(path.join(process.cwd(), "public", "fonts", "ARIALBD.ttf"), {
-  family: "Arial",
-  weight: "bold",
-});
+import { readFileSync, writeFileSync } from "fs";
+import { join } from "path";
 
 export const generateProfileImage = async (
   alphabet: string
 ): Promise<Buffer> => {
+  // Use process.cwd() for Vercel's filesystem
+  const fontPath = join(process.cwd(), "public", "fonts", "ARIALBD.ttf");
+  const fontData = readFileSync(fontPath);
+
+  // Create temporary font file
+  const tempPath = join("/tmp", "ARIALBD.ttf");
+  writeFileSync(tempPath, fontData);
+
+  registerFont(tempPath, { family: "Arial", weight: "bold" });
+
   const canvas = createCanvas(200, 200);
   const ctx = canvas.getContext("2d");
 
@@ -21,7 +26,7 @@ export const generateProfileImage = async (
 
   // Text styling with custom font
   ctx.fillStyle = "#FFFFFF";
-  ctx.font = "bold 80px Arial"; // Fallback chain
+  ctx.font = "bold 80px Arial, Roboto, sans-serif"; // Fallback chain
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 
