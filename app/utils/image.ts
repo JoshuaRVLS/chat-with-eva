@@ -1,4 +1,4 @@
-import { createCanvas } from "canvas";
+import { createCanvas } from "@napi-rs/canvas"; // This works in Vercel
 
 export const generateProfileImage = async (
   alphabet: string
@@ -6,7 +6,7 @@ export const generateProfileImage = async (
   const canvas = createCanvas(200, 200);
   const ctx = canvas.getContext("2d");
 
-  // Background color - using HSL for consistent brightness
+  // Background color
   const hue = Math.floor(Math.random() * 360);
   ctx.fillStyle = `hsl(${hue}, 70%, 60%)`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -20,6 +20,5 @@ export const generateProfileImage = async (
   // Draw text
   ctx.fillText(alphabet.toUpperCase(), 100, 100);
 
-  // Return as Buffer
   return canvas.toBuffer("image/png");
 };
