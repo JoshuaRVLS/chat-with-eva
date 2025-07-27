@@ -37,8 +37,8 @@ export default function RegisterPage() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: username,
-            email: email,
+            username: username.trim(),
+            email: email.trim(),
             password: password,
             confirmPassword: confirmPassword,
           }),

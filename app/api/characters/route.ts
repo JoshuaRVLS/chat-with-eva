@@ -15,6 +15,19 @@ export const POST = async (req: Request) => {
     const scenario = form.get("scenario");
     const initialMessage = form.get("initialMessage");
     const userId = form.get("userId");
+    const tags: { label: string; value: string }[] = JSON.parse(
+      form.get("tags") as string
+    );
+
+    console.log(tags);
+
+    const tag = await db.characterTag.findUnique({
+      where: {
+        id: tags[0].value,
+      },
+    });
+
+    console.log(tag);
 
     await db.character.create({
       data: {
@@ -35,6 +48,9 @@ export const POST = async (req: Request) => {
           },
         },
         scenario: scenario as string,
+        tags: {
+          connect: tags.map((tag) => ({ id: tag.value })),
+        },
       },
     });
     return NextResponse.json({

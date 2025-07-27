@@ -1,4 +1,4 @@
-import { User } from "@/app/generated/prisma";
+import { CharacterTag, User } from "@/app/generated/prisma";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import defaultJPG from "@/public/default.jpg";
@@ -11,6 +11,7 @@ const CharacterCard = ({
   authorName,
   characterId,
   className,
+  tags,
 }: {
   characterName: string;
   image: File | Blob | string | null;
@@ -18,6 +19,7 @@ const CharacterCard = ({
   authorName: string;
   characterId?: string;
   className?: string;
+  tags?: { label: string; value: string }[];
 }) => {
   const [imageUrl, setImageUrl] = useState<string | null>("");
   const router = useRouter();
@@ -65,7 +67,16 @@ const CharacterCard = ({
           {characterBio}
         </span>
       </div>
-      <div>
+      <div className="flex-col flex gap-2">
+        <div className="flex gap-1 flex-wrap overflow-hidden">
+          {tags?.length! > 0
+            ? tags?.map((tag) => (
+                <span className="p-2 border-borders border" key={tag.value}>
+                  {tag.label}
+                </span>
+              ))
+            : null}
+        </div>
         <button
           onClick={() => router.push(`/character/${characterId}`)}
           className="btn-outline w-full"

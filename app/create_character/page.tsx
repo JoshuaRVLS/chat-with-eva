@@ -6,6 +6,7 @@ import Dropdown from "../components/Dropdown/Dropdown";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import CharacterTags from "../components/CharacterTags/CharacterTags";
 
 const page = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -16,6 +17,9 @@ const page = () => {
   const [scenario, setScenario] = useState<string>("");
   const [initialMessage, setInitialMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [selectedOptions, setSelectedOptions] = useState<
+    { label: string; value: string }[]
+  >([]);
   const router = useRouter();
 
   const { user } = useContext(AuthContext);
@@ -34,6 +38,8 @@ const page = () => {
     formData.append("scenario", scenario);
     formData.append("initialMessage", initialMessage);
     formData.append("userId", user?.id as string);
+    formData.append("tags", JSON.stringify(selectedOptions));
+    console.log(selectedOptions);
 
     try {
       const response = await fetch("/api/characters", {
@@ -158,6 +164,13 @@ const page = () => {
             </li>
           </ul>
         </div>
+        <div className="w-full flex flex-col gap-1">
+          <span>Character Tags</span>
+          <CharacterTags
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+          />
+        </div>
         <div className="flex flex-col gap-1 w-full">
           <span>Scenario</span>
           <textarea
@@ -225,6 +238,7 @@ const page = () => {
               characterName={characterName}
               image={image}
               characterBio={characterBio}
+              tags={selectedOptions}
             />
           )}
         </div>

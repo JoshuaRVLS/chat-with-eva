@@ -1,6 +1,6 @@
 "use client";
 
-import { Character, User } from "@/app/generated/prisma";
+import { Character, CharacterTag, User } from "@/app/generated/prisma";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import React from "react";
@@ -13,6 +13,7 @@ const CharacterView = ({ id }: { id: string }) => {
     Character & {
       author: User;
       photo: { data: Uint8Array; mimetype: string; name: string };
+      tags: CharacterTag[];
     }
   >({
     queryKey: ["character"],
@@ -69,6 +70,17 @@ const CharacterView = ({ id }: { id: string }) => {
         <span className="btn w-full text-center p-2" onClick={startChat}>
           Start Chat
         </span>
+        <div className="flex gap-2 flex-wrap">
+          {data.tags.length &&
+            data.tags.map((tag) => (
+              <span
+                key={tag.id}
+                className="p-2 rounded-full border-borders border"
+              >
+                {tag.name}
+              </span>
+            ))}
+        </div>
         <span className="py-5 rounded-full border-borders border px-5 w-fit">
           by <b>@{data.author.username}</b>
         </span>

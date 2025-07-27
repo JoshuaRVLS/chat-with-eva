@@ -26,7 +26,7 @@ const Characters = () => {
   return (
     <div className="flex flex-col gap-4 pb-8">
       <h1 className="text-3xl">Community Characters</h1>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 h-48">
         {data.map((character) => (
           <Reveal key={character.id}>
             <CharacterCard

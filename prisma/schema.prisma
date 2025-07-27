@@ -47,8 +47,8 @@ model Character {
   authorId String
   chats Chat[]
   photo CharacterImage?
-  tag CharacterTag? @relation(fields: [tagId], references: [id])
-  tagId String?
+  tags CharacterTag[] @relation(fields: [tagIds], references: [id])
+  tagIds String[] 
   comments Comment[]
 }
 
@@ -66,7 +66,8 @@ model Comment {
 model CharacterTag {
   id String @id @default(cuid()) @map("_id")
   name String
-  chars Character[]
+  charIds String[]
+  chars Character[] @relation(fields: [charIds], references: [id])
 }
 
 model CharacterImage {
@@ -85,6 +86,8 @@ model Chat {
   user User @relation(fields: [userId], references: [id])
   userId String
   messages Message[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Message {
