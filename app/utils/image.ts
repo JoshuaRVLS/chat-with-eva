@@ -1,8 +1,11 @@
-import { createCanvas } from "@napi-rs/canvas"; // This works in Vercel
+import { registerFont, createCanvas } from "canvas";
+import path from "path";
+import { readFileSync } from "fs";
 
-export const config = {
-  runtime: "edge",
-};
+// Register fonts (do this once at module level)
+registerFont(path.join(process.cwd(), "fonts", "ARIALBD.ttf"), {
+  family: "Arial",
+});
 
 export const generateProfileImage = async (
   alphabet: string
@@ -15,9 +18,9 @@ export const generateProfileImage = async (
   ctx.fillStyle = `hsl(${hue}, 70%, 60%)`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Text styling
+  // Text styling with custom font
   ctx.fillStyle = "#FFFFFF";
-  ctx.font = "bold 80px Arial";
+  ctx.font = "bold 80px Arial"; // Fallback chain
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 

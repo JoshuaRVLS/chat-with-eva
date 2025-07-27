@@ -4,6 +4,7 @@
     "": {
       "name": "ai-frontend",
       "dependencies": {
+        "@canvas-fonts/arial": "^1.0.4",
         "@napi-rs/canvas": "^0.1.74",
         "@next-auth/prisma-adapter": "^1.0.7",
         "@next/env": "^15.4.1",
@@ -56,6 +57,8 @@
     "@ampproject/remapping": ["@ampproject/remapping@2.3.0", "", { "dependencies": { "@jridgewell/gen-mapping": "^0.3.5", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="],
 
     "@babel/runtime": ["@babel/runtime@7.27.6", "", {}, "sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q=="],
+
+    "@canvas-fonts/arial": ["@canvas-fonts/arial@1.0.4", "", {}, "sha512-3kutrSYYWiICFjMNQWqlhu1JJmi1tlqz+CaVgkpq24B4oREIg8IYDvqJK4DiewC0qvcWvqVS/8GPNv5QXm7KeA=="],
 
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 
