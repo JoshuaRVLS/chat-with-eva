@@ -1,5 +1,9 @@
 import { createCanvas } from "@napi-rs/canvas"; // This works in Vercel
 
+export const config = {
+  runtime: "edge",
+};
+
 export const generateProfileImage = async (
   alphabet: string
 ): Promise<Buffer> => {
