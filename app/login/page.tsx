@@ -13,31 +13,28 @@ export default function LoginPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const login = useCallback(
-    async (e: FormEvent) => {
-      setLoading(true);
-      e.preventDefault();
-      try {
-        const response = await signIn("credentials", {
-          redirect: false,
-          username,
-          password,
-        });
+  const login = async (e: FormEvent) => {
+    setLoading(true);
+    e.preventDefault();
+    try {
+      const response = await signIn("credentials", {
+        redirect: false,
+        username,
+        password,
+      });
 
-        if (!response?.ok) {
-          toast.error("Error");
-        }
-
-        toast.success("Login Success");
-        router.push("/");
-      } catch (error) {
-        console.log(error);
-        toast.error("An unexpected error occurred");
+      if (!response?.ok) {
+        toast.error("Error");
       }
-      setLoading(false);
-    },
-    [username, password]
-  );
+
+      toast.success("Login Success");
+      router.replace("/");
+    } catch (error) {
+      console.log(error);
+      toast.error("An unexpected error occurred");
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="center">
