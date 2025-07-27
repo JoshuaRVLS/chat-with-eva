@@ -34,9 +34,12 @@ const History = () => {
       }`}
     >
       <h1 className="text-3xl">Continue Chat</h1>
-      <div className="flex flex-[1] lg:flex-auto grow gap-3 overflow-auto">
+      <div className="flex  gap-3 overflow-auto">
         {data.map((chat) => (
-          <div className="flex flex-col gap-1" key={chat.id}>
+          <div
+            className="flex flex-col gap-1 flex-[1] lg:flex-auto grow"
+            key={chat.id}
+          >
             <CharacterCard
               authorName={chat.character.author.username}
               characterBio={chat.character.bio}
