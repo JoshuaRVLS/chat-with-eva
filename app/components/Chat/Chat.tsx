@@ -107,12 +107,12 @@ const Chat = ({ chatId }: { chatId: string }) => {
             {data.messages.map((message) => (
               <div
                 key={message.id}
-                className={`w-full flex items-start gap-4 p-4 border-borders shadow border  ${
+                className={`w-full flex items-start flex-col gap-4 p-4 border-borders shadow border  ${
                   message.fromUser ? "flex-row-reverse" : "flex-row"
                 }`}
               >
                 {message.fromUser ? (
-                  <span>{user?.username}</span>
+                  <span className="btn-outline">{data.user.username}</span>
                 ) : (
                   <Image
                     src={`data:${
