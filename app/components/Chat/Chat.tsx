@@ -30,16 +30,6 @@ const Chat = ({ chatId }: { chatId: string }) => {
       ),
   });
 
-  const { data: userData } = useQuery<
-    User & { profileImage: UserProfileImage }
-  >({
-    queryKey: ["user"],
-    queryFn: () =>
-      fetch(`/api/users/${user?.id}`).then((res) =>
-        res.json().then((data) => data.data)
-      ),
-  });
-
   const [message, setMessage] = useState<string>("");
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState<boolean>(false);
@@ -122,17 +112,7 @@ const Chat = ({ chatId }: { chatId: string }) => {
                 }`}
               >
                 {message.fromUser ? (
-                  <Image
-                    src={`data:${
-                      userData?.profileImage.mimetype
-                    };base64,${Buffer.from(
-                      Object.values(data.user.profileImage.data)
-                    ).toString("base64")}`}
-                    width={1000}
-                    height={1000}
-                    alt={data.user.username}
-                    className="size-8 rounded-full shadow object-cover object-top"
-                  />
+                  <span>You</span>
                 ) : (
                   <Image
                     src={`data:${

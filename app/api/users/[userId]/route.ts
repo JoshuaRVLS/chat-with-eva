@@ -6,7 +6,9 @@ export const GET = async (
   { params }: { params: Promise<{ userId: string }> }
 ) => {
   const userId = (await params).userId;
-  const user = await db.user.findUnique({ where: { id: userId } });
+  const user = await db.user.findUnique({
+    where: { id: userId },
+  });
   if (!user) {
     return NextResponse.json(
       { success: false, message: "User not found" },
