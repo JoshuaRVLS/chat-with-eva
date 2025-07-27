@@ -74,6 +74,35 @@ const Chat = ({ chatId }: { chatId: string }) => {
       <div className="w-full lg:w-1/2 flex flex-col justify-between h-full">
         <div className="h-full grow flex-[1] overflow-scroll scrollbar-hide p-4">
           <div className={`flex flex-col gap-2 text-lg `}>
+            <div className="text-center p-4 text-wrap wrap-break-word">
+              {" "}
+              <ReactMarkDown
+                components={
+                  {
+                    p: ({ node, ...props }) => (
+                      <p
+                        className=" text-wrap wrap-break-word whitespace-pre-wrap word-break-break-all"
+                        {...props}
+                      />
+                    ),
+                    strong: ({ node, ...props }) => (
+                      <strong
+                        style={{ fontWeight: "bold", color: "white" }}
+                        {...props}
+                      />
+                    ),
+                    em: ({ node, ...props }) => (
+                      <em
+                        style={{ fontStyle: "italic", color: "gray" }}
+                        {...props}
+                      />
+                    ),
+                  } as Components
+                }
+              >
+                {data.character.introMessage}
+              </ReactMarkDown>
+            </div>
             {data.messages.map((message) => (
               <div
                 key={message.id}

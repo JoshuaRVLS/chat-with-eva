@@ -24,7 +24,7 @@ const Characters = () => {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 pb-8">
       <h1 className="text-3xl">Community Characters</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {data.map((character) => (
