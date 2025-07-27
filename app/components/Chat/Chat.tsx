@@ -112,7 +112,7 @@ const Chat = ({ chatId }: { chatId: string }) => {
                 }`}
               >
                 {message.fromUser ? (
-                  <span>You</span>
+                  <span>{user?.username}</span>
                 ) : (
                   <Image
                     src={`data:${
