@@ -123,5 +123,5 @@ li {
 }
 
 .card {
-  @apply transition hover:shadow cursor-pointer flex relative flex-col gap-2 border border-borders p-4 rounded-lg shadow w-full md:w-52 h-96 max-h-96 justify-between;
+  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex relative flex-col gap-2 border border-borders p-4 rounded-lg shadow w-full md:w-60 h-[30rem] justify-between;
 }

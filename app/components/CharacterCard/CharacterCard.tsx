@@ -48,8 +48,11 @@ const CharacterCard = ({
   }, [image]);
 
   return (
-    <div className={`card ${className}`}>
-      <div className="flex flex-col gap-1 overflow-hidden">
+    <div
+      onClick={() => router.push(`/character/${characterId}`)}
+      className={`card ${className}`}
+    >
+      <div className="flex flex-col gap-3 overflow-hidden">
         <span>{characterName}</span>
         <div className="w-full">
           {image && (
@@ -77,12 +80,6 @@ const CharacterCard = ({
               ))
             : null}
         </div>
-        <button
-          onClick={() => router.push(`/character/${characterId}`)}
-          className="btn-outline w-full"
-        >
-          View
-        </button>
       </div>
     </div>
   );

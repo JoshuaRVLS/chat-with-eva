@@ -4,8 +4,8 @@ import History from "./components/Home/History/History";
 
 const HomePage = () => {
   return (
-    <div className="pt-30 px-12 flex mt-5 justify-center w-full h-full overflow-auto scrollbar-hide">
-      <div className="lg:w-1/2 h-dvh pb-23 flex flex-col scrollbar-hide mb-32">
+    <div className="pt-30 px-12 flex justify-center w-full h-full scrollbar-hide">
+      <div className="lg:w-1/2 h-fit flex flex-col scrollbar-hide">
         <History />
         <Characters />
       </div>
