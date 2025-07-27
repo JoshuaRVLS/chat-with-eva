@@ -22,18 +22,13 @@ export default function LoginPage() {
           redirect: false,
           username,
           password,
-          callbackUrl: "/",
         });
 
-        if (response?.error) {
-          toast.error(response.error);
+        if (!response?.ok) {
+          toast.error("Error");
         }
 
-        if (response?.ok) {
-          toast.success("Login Success");
-          router.push("/");
-        }
-
+        toast.success("Login Success");
         router.push("/");
       } catch (error) {
         console.log(error);
