@@ -29,12 +29,12 @@ const History = () => {
 
   return (
     <div
-      className={`"flex flex-col gap-4 mb-12  h-full w-full ${
+      className={`"flex flex-col gap-4 mb-12 h-full w-full ${
         !data.length && "hidden"
       }`}
     >
       <h1 className="text-3xl">Continue Chat</h1>
-      <div className="flex gap-3 overflow-x-scroll">
+      <div className="flex gap-3 overflow-auto">
         {data.map((chat) => (
           <div className="flex flex-col gap-1" key={chat.id}>
             <CharacterCard

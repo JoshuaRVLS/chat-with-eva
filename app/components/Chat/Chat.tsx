@@ -29,6 +29,17 @@ const Chat = ({ chatId }: { chatId: string }) => {
         res.json().then((data) => data.data)
       ),
   });
+
+  const { data: userData } = useQuery<
+    User & { profileImage: UserProfileImage }
+  >({
+    queryKey: ["user"],
+    queryFn: () =>
+      fetch(`/api/users/${user?.id}`).then((res) =>
+        res.json().then((data) => data.data)
+      ),
+  });
+
   const [message, setMessage] = useState<string>("");
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState<boolean>(false);
@@ -113,7 +124,7 @@ const Chat = ({ chatId }: { chatId: string }) => {
                 {message.fromUser ? (
                   <Image
                     src={`data:${
-                      data.user.profileImage.mimetype
+                      userData?.profileImage.mimetype
                     };base64,${Buffer.from(
                       Object.values(data.user.profileImage.data)
                     ).toString("base64")}`}
