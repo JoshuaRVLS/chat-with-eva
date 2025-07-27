@@ -3,8 +3,9 @@ import path from "path";
 import { readFileSync } from "fs";
 
 // Register fonts (do this once at module level)
-registerFont(path.join(process.cwd(), "fonts", "ARIALBD.ttf"), {
+registerFont(path.join(process.cwd(), "public", "fonts", "ARIALBD.ttf"), {
   family: "Arial",
+  weight: "bold",
 });
 
 export const generateProfileImage = async (
