@@ -31,7 +31,7 @@ export default function LoginPage() {
 
         if (response?.ok) {
           toast.success("Login Success");
-          router.push(response.url || "/");
+          router.push("/");
         }
 
         router.push("/");
