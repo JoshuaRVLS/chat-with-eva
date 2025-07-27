@@ -39,7 +39,6 @@ const page = () => {
     formData.append("initialMessage", initialMessage);
     formData.append("userId", user?.id as string);
     formData.append("tags", JSON.stringify(selectedOptions));
-    console.log(selectedOptions);
 
     try {
       const response = await fetch("/api/characters", {

@@ -19,16 +19,6 @@ export const POST = async (req: Request) => {
       form.get("tags") as string
     );
 
-    console.log(tags);
-
-    const tag = await db.characterTag.findUnique({
-      where: {
-        id: tags[0].value,
-      },
-    });
-
-    console.log(tag);
-
     await db.character.create({
       data: {
         name: characterName as string,
