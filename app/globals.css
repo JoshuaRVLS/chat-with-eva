@@ -55,7 +55,6 @@
 body {
   @apply font-bitcount w-dvw h-dvh p-0;
   background: var(--background);
-  overflow-x: hidden;
   color: var(--foreground);
   box-sizing: border-box;
   margin: 0;
@@ -123,5 +122,5 @@ li {
 }
 
 .card {
-  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex relative flex-col gap-2 border border-borders p-4 rounded-lg shadow w-full md:w-60 h-[30rem] justify-between;
+  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full md:w-56 h-[30rem] justify-between;
 }

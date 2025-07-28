@@ -25,8 +25,7 @@ const CharacterView = ({ id }: { id: string }) => {
 
   const router = useRouter();
 
-  if (isPending)
-    return <p className="text-center pt-24">Loading Character...</p>;
+  if (isPending) return <p></p>;
   if (error) return <p>{error.message}</p>;
 
   const startChat = async () => {

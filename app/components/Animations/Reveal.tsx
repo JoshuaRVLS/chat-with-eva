@@ -17,6 +17,7 @@ const Reveal = ({
 }: RevealProps) => {
   return (
     <motion.div
+      className="w-full md:w-fit h-fit"
       initial={{
         opacity: 0,
         y: direction === "down" ? 100 : direction === "up" ? -100 : 0,

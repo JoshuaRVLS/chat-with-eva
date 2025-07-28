@@ -10,24 +10,22 @@ const Navbar = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <Reveal direction="down">
-      <div className="nav">
-        <Link
-          href="/"
-          className="font-bitcount text-3xl font-normal tracking-widest text-primary-text"
-        >
-          JChatAI<sup>BETA</sup>
+    <div className="nav">
+      <Link
+        href="/"
+        className="font-bitcount text-3xl font-normal tracking-widest text-primary-text"
+      >
+        JChatAI<sup>BETA</sup>
+      </Link>
+      {/* <Search /> */}
+      {user ? (
+        <AuthenticatedMenu />
+      ) : (
+        <Link href="/register" className="btn-outline">
+          Sign Up
         </Link>
-        {/* <Search /> */}
-        {user ? (
-          <AuthenticatedMenu />
-        ) : (
-          <Link href="/register" className="btn-outline">
-            Sign Up
-          </Link>
-        )}
-      </div>
-    </Reveal>
+      )}
+    </div>
   );
 };
 

@@ -1,25 +1,34 @@
 "use client";
 import { User } from "next-auth";
-import { User as UserModel } from "../generated/prisma";
 import { SessionProvider, useSession } from "next-auth/react";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type AuthContextData = {
   user?: User;
-  status?: "loading" | "authenticated" | "unauthenticated";
+  status: "loading" | "authenticated" | "unauthenticated";
 };
 
-export const AuthContext = createContext<AuthContextData>({});
+export const AuthContext = createContext<AuthContextData>({
+  status: "loading",
+});
+
+export const useAuth = () => useContext(AuthContext);
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState<AuthContextData>({});
   const { data: session, status } = useSession();
+  const [contextValue, setContextValue] = useState<AuthContextData>({
+    status: "loading",
+  });
+
   useEffect(() => {
-    if (status === "authenticated") setData({ user: session.user, status });
-  }, [status]);
+    setContextValue({
+      user: session?.user,
+      status: status,
+    });
+  }, [session, status]);
 
   return (
-    <AuthContext.Provider value={data}>
+    <AuthContext.Provider value={contextValue}>
       {status === "loading" ? null : children}
     </AuthContext.Provider>
   );

@@ -39,7 +39,7 @@ const Chat = ({ chatId }: { chatId: string }) => {
     }
   }, [data]);
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return <p></p>;
   if (error) return <p>{error.message}</p>;
 
   const chat = async () => {

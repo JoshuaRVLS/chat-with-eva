@@ -20,13 +20,13 @@ const Characters = () => {
       ),
   });
 
-  if (isPending) return <p className="text-center">Loading...</p>;
+  if (isPending) return <p></p>;
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div className="flex flex-col gap-4 pb-8">
+    <div className="flex flex-col gap-4 w-full pb-8">
       <h1 className="text-3xl">Community Characters</h1>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 h-48">
+      <div className="flex flex-wrap w-full gap-4">
         {data.map((character) => (
           <Reveal key={character.id}>
             <CharacterCard

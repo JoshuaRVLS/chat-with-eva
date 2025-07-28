@@ -20,7 +20,6 @@ const CharacterTags = ({
       fetch("/api/tags").then((res) => res.json().then((data) => data.data)),
   });
 
-  if (isPending) return <p>Loading...</p>;
   if (error) return <p>{error.message}</p>;
 
   return (

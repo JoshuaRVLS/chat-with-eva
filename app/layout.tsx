@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased scrollbar-hide `}>
+      <body className={`antialiased `}>
         <QueryProvider>
           <ScrollProvider>
             <AuthProvider>

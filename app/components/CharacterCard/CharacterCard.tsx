@@ -50,9 +50,9 @@ const CharacterCard = ({
   return (
     <div
       onClick={() => router.push(`/character/${characterId}`)}
-      className={`card ${className}`}
+      className={`card`}
     >
-      <div className="flex flex-col gap-3 overflow-hidden">
+      <div className="w-full flex flex-col gap-3 overflow-hidden">
         <span>{characterName}</span>
         <div className="w-full">
           {image && (
@@ -66,7 +66,7 @@ const CharacterCard = ({
           )}
         </div>
         <span className="font-light text-purple-300">@{authorName}</span>
-        <span className="font-light wrap-break-word overflow-hidden">
+        <span className="font-light w-full wrap-break-word overflow-hidden">
           {characterBio}
         </span>
       </div>
