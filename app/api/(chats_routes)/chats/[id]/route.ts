@@ -26,6 +26,14 @@ export const GET = async (
         },
       },
     });
+    await db.chat.update({
+      where: {
+        id: chatId,
+      },
+      data: {
+        updatedAt: new Date(),
+      },
+    });
     console.log(chat);
     return NextResponse.json({ success: true, data: chat }, { status: 200 });
   } catch (error) {

@@ -25,7 +25,9 @@ const OpenMenu = () => {
           </div>
           <div className="nav-item">
             <FaUserFriends className="icon" />
-            <span className="nav-link w-full">My Characters</span>
+            <Link href={"/my_characters"} className="nav-link w-full">
+              My Characters
+            </Link>
           </div>
           <div className="nav-item">
             <FaLine className="icon" />
