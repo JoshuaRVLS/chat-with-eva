@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthContext } from "@/app/providers/AuthProvider";
+import { AuthContext } from "@/app/(pages)/providers/AuthProvider";
 import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 

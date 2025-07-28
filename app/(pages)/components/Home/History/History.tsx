@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import CharacterCard from "../../CharacterCard/CharacterCard";
 import Link from "next/link";
-import { AuthContext } from "@/app/providers/AuthProvider";
+import { AuthContext } from "@/app/(pages)/providers/AuthProvider";
 import Reveal from "../../Animations/Reveal";
 
 const History = () => {

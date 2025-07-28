@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext } from "react";
-import { AuthContext } from "@/app/providers/AuthProvider";
+import { AuthContext } from "@/app/(pages)/providers/AuthProvider";
 import AuthenticatedMenu from "./AuthenticatedMenu";
 import Link from "next/link";
 import Reveal from "../Animations/Reveal";

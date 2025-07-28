@@ -4,7 +4,7 @@ import { Comment, User, UserProfileImage } from "@/app/generated/prisma";
 import { useQuery } from "@tanstack/react-query";
 import { FaPaperPlane } from "react-icons/fa";
 import React, { useContext, useState } from "react";
-import { AuthContext } from "@/app/providers/AuthProvider";
+import { AuthContext } from "@/app/(pages)/providers/AuthProvider";
 import Image from "next/image";
 import { bytesToBase64 } from "@/app/utils/image";
 

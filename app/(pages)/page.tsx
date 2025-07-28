@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-query";
 import { CharactersData, ChatHistroy } from "@/@types/type";
 import { getServerSession, Session } from "next-auth";
-import { authOptions } from "./utils/auth";
+import { authOptions } from "../utils/auth";
 
 const HomePage = async () => {
   const queryClient = new QueryClient();

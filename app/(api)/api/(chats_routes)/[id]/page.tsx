@@ -1,4 +1,4 @@
-import Chat from "@/app/components/Chat/Chat";
+import Chat from "@/app/(pages)/components/Chat/Chat";
 import { Metadata } from "next";
 import React from "react";
 

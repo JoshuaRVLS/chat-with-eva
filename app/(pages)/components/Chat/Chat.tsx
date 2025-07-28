@@ -12,7 +12,7 @@ import Image from "next/image";
 import { FaPaperPlane } from "react-icons/fa";
 import MarkDown from "../MarkDown/MarkDown";
 import { bytesToBase64 } from "@/app/utils/image";
-import { AuthContext } from "@/app/providers/AuthProvider";
+import { AuthContext } from "@/app/(pages)/providers/AuthProvider";
 import type {
   Character,
   CharacterImage,

@@ -2,7 +2,7 @@ import React from "react";
 
 // app/character/[id]/page.tsx
 import { Metadata } from "next";
-import CharacterView from "@/app/components/CharacterView/CharacterView";
+import CharacterView from "@/app/(pages)/components/CharacterView/CharacterView";
 
 interface PageProps {
   params: Promise<{ id: string }>;
