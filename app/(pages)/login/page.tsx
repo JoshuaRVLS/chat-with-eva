@@ -28,7 +28,7 @@ export default function LoginPage() {
       }
 
       toast.success("Login Success");
-      router.replace("/");
+      router.refresh();
     } catch (error) {
       console.log(error);
       toast.error("An unexpected error occurred");
