@@ -21,7 +21,7 @@ export const GET = async (
         messages: true,
       },
       orderBy: {
-        createdAt: "desc",
+        updatedAt: "desc",
       },
     });
     return NextResponse.json({ success: true, data: chats }, { status: 200 });
