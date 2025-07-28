@@ -5,21 +5,16 @@ import { useQuery } from "@tanstack/react-query";
 import { Character, User } from "@/app/generated/prisma";
 import CharacterCard from "../../CharacterCard/CharacterCard";
 import Reveal from "../../Animations/Reveal";
+import { CharactersData } from "@/@types/type";
 
 const Characters = () => {
-  const { isPending, error, data } = useQuery<
-    (Character & {
-      author: User;
-      photo: { data: Uint8Array; mimetype: string; name: string };
-    })[]
-  >({
+  const { isPending, error, data } = useQuery<CharactersData>({
     queryKey: ["characters"],
     queryFn: () =>
       fetch("/api/characters").then((res) =>
         res.json().then((data) => data.data)
       ),
   });
-
   if (isPending) return <p></p>;
   if (error) return <p>{error.message}</p>;
 
