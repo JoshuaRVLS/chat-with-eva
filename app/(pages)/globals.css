@@ -122,5 +122,9 @@ li {
 }
 
 .card {
-  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full md:w-56 h-[30rem] justify-between;
+  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full lg:w-56 h-[30rem] justify-between;
+}
+
+.history-card {
+  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full h-[30rem] justify-between;
 }

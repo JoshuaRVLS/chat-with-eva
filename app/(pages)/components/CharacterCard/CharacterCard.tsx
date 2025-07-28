@@ -50,7 +50,7 @@ const CharacterCard = ({
   return (
     <div
       onClick={() => router.push(`/character/${characterId}`)}
-      className={`card`}
+      className={`${className ? className : "card"}`}
     >
       <div className="w-full flex flex-col gap-3 overflow-hidden">
         <span>{characterName}</span>
@@ -60,7 +60,7 @@ const CharacterCard = ({
               src={imageUrl || defaultJPG}
               width={50}
               height={50}
-              className="object-cover object-top w-full h-52"
+              className="object-cover w-full h-52"
               alt="Image"
             />
           )}
