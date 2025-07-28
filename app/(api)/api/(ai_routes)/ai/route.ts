@@ -53,7 +53,7 @@ export const POST = async (req: Request) => {
             role: "system",
             content: `[INTRO MESSAGE] ${chat?.character.introMessage}`,
           },
-          ...previousMessages!.splice(-150),
+          ...previousMessages!.splice(-100),
           {
             role: "user",
             content,
