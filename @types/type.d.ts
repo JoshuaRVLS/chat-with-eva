@@ -7,3 +7,8 @@ export type ChatHistroy = (Chat & {
   character: Character & { photo: CharacterImage; author: User };
   messages: Message[];
 })[];
+
+export type Image = {
+  data: Uint8Array;
+  mimetype: string;
+};

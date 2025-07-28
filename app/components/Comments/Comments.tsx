@@ -6,6 +6,7 @@ import { FaPaperPlane } from "react-icons/fa";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "@/app/providers/AuthProvider";
 import Image from "next/image";
+import { bytesToBase64 } from "@/app/utils/image";
 
 const Comments = ({ characterId }: { characterId: string }) => {
   const [comment, setComment] = useState<string>("");
@@ -68,11 +69,7 @@ const Comments = ({ characterId }: { characterId: string }) => {
           >
             <div className="w-full flex gap-2 items-center ">
               <Image
-                src={`data:${
-                  comment.author.profileImage.mimetype
-                };base64,${Buffer.from(
-                  Object.values(comment.author.profileImage.data)
-                ).toString("base64")}`}
+                src={bytesToBase64(comment.author.profileImage)}
                 width={1000}
                 height={1000}
                 alt={comment.author.username}

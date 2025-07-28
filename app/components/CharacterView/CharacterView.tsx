@@ -7,6 +7,7 @@ import React from "react";
 import Dropdown from "../Dropdown/Dropdown";
 import Comments from "../Comments/Comments";
 import { useRouter } from "next/navigation";
+import { bytesToBase64 } from "@/app/utils/image";
 
 const CharacterView = ({ id }: { id: string }) => {
   const { isPending, error, data } = useQuery<
@@ -58,9 +59,7 @@ const CharacterView = ({ id }: { id: string }) => {
       <div className="w-full h-[50%] lg:w-[40%] lg:h-[40%] flex-col flex gap-2 p-12 shadow border border-borders">
         <h1 className="text-5xl">{data.name}</h1>
         <Image
-          src={`data:${data.photo.mimetype};base64,${Buffer.from(
-            Object.values(data.photo.data)
-          ).toString("base64")}`}
+          src={bytesToBase64(data.photo)}
           width={1000}
           height={1000}
           alt={data.name}

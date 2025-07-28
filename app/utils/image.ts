@@ -1,3 +1,4 @@
+import { Image } from "@/@types/type";
 import { createCanvas } from "canvas";
 
 export const generateProfileImage = async (
@@ -22,4 +23,10 @@ export const generateProfileImage = async (
 
   // Return as Buffer
   return canvas.toBuffer("image/png");
+};
+
+export const bytesToBase64 = (photo: Image): string => {
+  return `data:${photo.mimetype};base64,${Buffer.from(
+    Object.values(photo.data)
+  ).toString("base64")}`;
 };
