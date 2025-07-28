@@ -154,6 +154,13 @@ const page = () => {
           />
           <ul>
             <li>
+              <span>{"{char}"} untuk format karakter nya, contoh</span>
+              <span>
+                {"{user}"} untuk format user nya, contoh:{" "}
+                {"{char} adalah sahabat {user}"}
+              </span>
+            </li>
+            <li>
               Personality AI lu, <b>sifat</b>, <b>fisik</b>, <b>nama</b>,{" "}
               <b>latar belakang</b>, dan banyak lagi. Semua jelaskan disini.
             </li>

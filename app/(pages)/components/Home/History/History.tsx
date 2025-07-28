@@ -40,6 +40,9 @@ const History = () => {
       }`}
     >
       <h1 className="text-3xl">Continue Chat</h1>
+      <span className="hidden lg:block font-light text-gray-400">
+        Pencet shift terus scroll untuk scroll ke kanan/kiri.
+      </span>
       <div className="flex w-full gap-3 overflow-auto">
         {data.map((chat) => (
           <div className="flex flex-col gap-1" key={chat.id}>
