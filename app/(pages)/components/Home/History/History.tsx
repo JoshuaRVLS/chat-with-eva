@@ -46,20 +46,24 @@ const History = () => {
       <div className="flex w-full gap-3 overflow-auto">
         {data.map((chat) => (
           <div className="flex flex-col w-full gap-1" key={chat.id}>
-            <CharacterCard
-              className="history-card"
-              authorName={chat.character.author.username}
-              characterBio={chat.character.bio}
-              characterName={chat.character.name}
-              characterId={chat.character.id}
-              image={
-                chat.character.photo?.data
-                  ? `data:${chat.character.photo.mimetype};base64,${Buffer.from(
-                      Object.values(chat.character.photo.data)
-                    ).toString("base64")}`
-                  : null
-              }
-            />
+            <Reveal>
+              <CharacterCard
+                className="history-card"
+                authorName={chat.character.author.username}
+                characterBio={chat.character.bio}
+                characterName={chat.character.name}
+                characterId={chat.character.id}
+                image={
+                  chat.character.photo?.data
+                    ? `data:${
+                        chat.character.photo.mimetype
+                      };base64,${Buffer.from(
+                        Object.values(chat.character.photo.data)
+                      ).toString("base64")}`
+                    : null
+                }
+              />
+            </Reveal>
 
             <Link
               href={`/chat/${chat.id}`}
