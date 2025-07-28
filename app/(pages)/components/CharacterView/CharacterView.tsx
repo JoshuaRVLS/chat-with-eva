@@ -3,11 +3,12 @@
 import { Character, CharacterTag, User } from "@/app/generated/prisma";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import Dropdown from "../Dropdown/Dropdown";
 import Comments from "../Comments/Comments";
 import { useRouter } from "next/navigation";
 import { bytesToBase64 } from "@/app/utils/image";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const CharacterView = ({ id }: { id: string }) => {
   const { isPending, error, data } = useQuery<
@@ -24,6 +25,8 @@ const CharacterView = ({ id }: { id: string }) => {
       ),
   });
 
+  const { user } = useContext(AuthContext);
+
   const router = useRouter();
 
   if (isPending) return <p></p>;
@@ -38,7 +41,7 @@ const CharacterView = ({ id }: { id: string }) => {
         },
         body: JSON.stringify({
           characterId: id,
-          userId: data.author.id,
+          userId: user?.id,
         }),
       });
       if (!response.ok) {
