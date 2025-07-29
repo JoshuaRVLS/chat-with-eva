@@ -37,7 +37,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="center">
+    <div className="center p-8">
       <Reveal>
         <form onSubmit={login} className="form">
           <h1 className="title">LOGIN</h1>

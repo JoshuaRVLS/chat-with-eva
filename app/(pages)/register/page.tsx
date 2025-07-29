@@ -67,7 +67,7 @@ export default function RegisterPage() {
   );
 
   return (
-    <div className="center">
+    <div className="center p-8">
       <Reveal>
         <form onSubmit={register} className="form">
           <h1 className="title">REGISTER</h1>
