@@ -1,15 +1,21 @@
 "use client";
 
+import { Character, CharacterTag, User } from "@/app/generated/prisma";
+import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import React, { FormEvent, useContext, useEffect, useState } from "react";
-import CharacterCard from "../components/CharacterCard/CharacterCard";
-import Dropdown from "../components/Dropdown/Dropdown";
-import { AuthContext } from "../providers/AuthProvider";
-import toast from "react-hot-toast";
+import Dropdown from "../Dropdown/Dropdown";
+import Comments from "../Comments/Comments";
 import { useRouter } from "next/navigation";
-import CharacterTags from "../components/CharacterTags/CharacterTags";
+import { bytesToBase64 } from "@/app/utils/image";
+import { AuthContext } from "../../providers/AuthProvider";
+import toast from "react-hot-toast";
+import CharacterTags from "../CharacterTags/CharacterTags";
+import CharacterCard from "../CharacterCard/CharacterCard";
 
-const page = () => {
-  const [image, setImage] = useState<File | null>(null);
+const CharacterEdit = ({ id }: { id: string }) => {
+  const [defaultImage, setDefaultImage] = useState<string | null>(null);
+  const [image, setImage] = useState<File | string | null>(null);
   const [characterName, setCharacterName] = useState<string>("");
   const [characterAlias, setCharacterAlias] = useState<string>("");
   const [characterBio, setCharacterBio] = useState<string>("");
@@ -20,9 +26,36 @@ const page = () => {
   const [selectedOptions, setSelectedOptions] = useState<
     { label: string; value: string }[]
   >([]);
+
+  const { isPending, error, data } = useQuery<
+    Character & {
+      author: User;
+      photo: { data: Uint8Array; mimetype: string; name: string };
+      tags: CharacterTag[];
+    }
+  >({
+    queryKey: ["character"],
+    queryFn: () =>
+      fetch(`/api/characters/${id}`).then((res) =>
+        res.json().then((data) => data.data)
+      ),
+  });
+
   const router = useRouter();
 
-  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    if (data) {
+      setImage(bytesToBase64(data.photo));
+      setCharacterName(data.name);
+      setCharacterBio(data.bio);
+      setCharacterPersona(data.persona);
+      setScenario(data.scenario);
+      setInitialMessage(data.introMessage);
+      setSelectedOptions(
+        data.tags.map((tag) => ({ label: tag.name, value: tag.id }))
+      );
+    }
+  }, [data]);
 
   const handleSubmit = async (e: FormEvent) => {
     setLoading(true);
@@ -30,6 +63,7 @@ const page = () => {
 
     const formData = new FormData();
 
+    formData.append("characterId", id);
     formData.append("image", image!);
     formData.append("characterName", characterName);
     formData.append("characterAlias", characterAlias);
@@ -61,6 +95,11 @@ const page = () => {
     }
   };
 
+  const { user } = useContext(AuthContext);
+
+  if (isPending) return <p></p>;
+  if (error) return <p>{error.message}</p>;
+
   return (
     <div className="create-character-container">
       <form onSubmit={handleSubmit} className="create-character-form">
@@ -73,7 +112,6 @@ const page = () => {
             type="file"
             id="image-upload"
             accept="image/*"
-            required
             onChange={(e) => setImage(e.target.files![0])}
             className="hidden"
           />
@@ -228,7 +266,7 @@ const page = () => {
             {Math.floor((characterPersona.length + scenario.length) / 4)}
           </span>
           <button className="btn">
-            {loading ? "Sedang dibuat..." : "Buat Character"}
+            {loading ? "Sedang diupdate..." : "Update"}
           </button>
         </div>
       </form>
@@ -236,7 +274,7 @@ const page = () => {
         <div className="w-1/2 lg:w-full">
           {user && (
             <CharacterCard
-              className="md:fixed"
+              className=""
               authorName={user!.username}
               characterName={characterName}
               image={image}
@@ -250,4 +288,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CharacterEdit;

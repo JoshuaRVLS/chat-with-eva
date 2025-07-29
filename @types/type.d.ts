@@ -1,3 +1,11 @@
+import {
+  Character,
+  CharacterImage,
+  Chat,
+  Message,
+  User,
+} from "@/app/generated/prisma";
+
 export type CharactersData = (Character & {
   author: User;
   photo: { data: Uint8Array; mimetype: string; name: string };

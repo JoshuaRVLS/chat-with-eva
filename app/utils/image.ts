@@ -1,5 +1,6 @@
 import { Image } from "@/@types/type";
 import { createCanvas } from "canvas";
+import { CharacterImage } from "../generated/prisma";
 
 export const generateProfileImage = async (
   alphabet: string
@@ -25,7 +26,7 @@ export const generateProfileImage = async (
   return canvas.toBuffer("image/png");
 };
 
-export const bytesToBase64 = (photo: Image): string => {
+export const bytesToBase64 = (photo: any): string => {
   return `data:${photo.mimetype};base64,${Buffer.from(
     Object.values(photo.data)
   ).toString("base64")}`;

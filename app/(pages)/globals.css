@@ -128,3 +128,11 @@ li {
 .history-card {
   @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full min-w-72 h-[30rem] justify-between;
 }
+
+.create-character-container {
+  @apply w-full select-none pt-32 p-6 flex flex-col md:flex-row justify-center gap-5;
+}
+
+.create-character-form {
+  @apply flex flex-col gap-6 items-start w-full md:w-1/2;
+}

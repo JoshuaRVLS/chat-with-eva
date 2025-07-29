@@ -8,6 +8,7 @@ export const POST = async (req: Request) => {
   try {
     const form = await req.formData();
     const image = form.get("image") as File;
+    const characterId = form.get("characterId");
     const characterName = form.get("characterName");
     const characterAlias = form.get("characterAlias");
     const characterBio = form.get("characterBio");
@@ -19,8 +20,11 @@ export const POST = async (req: Request) => {
       form.get("tags") as string
     );
 
-    await db.character.create({
-      data: {
+    await db.character.upsert({
+      where: {
+        id: characterId as string,
+      },
+      create: {
         name: characterName as string,
         bio: characterBio as string,
         persona: characterPersona as string,
@@ -32,7 +36,24 @@ export const POST = async (req: Request) => {
         introMessage: initialMessage as string,
         photo: {
           create: {
-            data: await image.bytes(),
+            data: (await image.bytes()) || null,
+            mimetype: image.type,
+            name: image.name,
+          },
+        },
+        scenario: scenario as string,
+        tags: {
+          connect: tags.map((tag) => ({ id: tag.value })),
+        },
+      },
+      update: {
+        name: characterName as string,
+        bio: characterBio as string,
+        persona: characterPersona as string,
+        introMessage: initialMessage as string,
+        photo: {
+          update: {
+            data: (await image.bytes()) || null,
             mimetype: image.type,
             name: image.name,
           },
