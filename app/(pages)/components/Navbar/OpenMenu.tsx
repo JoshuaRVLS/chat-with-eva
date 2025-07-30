@@ -11,11 +11,8 @@ import {
   FaUserPlus,
 } from "react-icons/fa";
 import Link from "next/link";
-import { usePersonaModal } from "@/app/stores/usePersonaModal";
 
 const OpenMenu = () => {
-  const { setIsOpen } = usePersonaModal();
-
   return (
     <Reveal direction="up">
       <div className="relative -z-10 select-none">
@@ -38,14 +35,9 @@ const OpenMenu = () => {
           </div>
           <div className="nav-item">
             <FaMask className="icon" />
-            <span
-              onClick={() => {
-                setIsOpen(true);
-              }}
-              className="nav-link w-full"
-            >
-              My Persona
-            </span>
+            <Link href={"/my_personas"} className="nav-link w-full">
+              My Personas
+            </Link>
           </div>
           <div className="nav-item mt-2 btn-outline">
             <FaSignOutAlt className="icon" />

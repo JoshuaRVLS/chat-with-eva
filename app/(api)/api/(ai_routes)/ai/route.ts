@@ -15,6 +15,12 @@ export const POST = async (req: Request) => {
     },
   });
 
+  const persona = await db.userPersona.findFirst({
+    where: {
+      id: (chat?.user.personaUsed as string) || undefined,
+    },
+  });
+
   // Convert messages to the format needed
   const previousMessages = chat?.messages.map((message) => ({
     role: message.fromUser ? "user" : "system",
@@ -36,11 +42,19 @@ export const POST = async (req: Request) => {
     },
     {
       role: "system",
-      content: `FORMAT {char} adalah ${chat?.character.name} itu sendiri. FORMAT {user} adalah ${chat?.user.username}`,
+      content: `FORMAT {char} adalah ${
+        chat?.character.name
+      } itu sendiri. FORMAT {user} adalah ${
+        persona ? persona.name : chat?.user.username
+      }`,
+    },
+    {
+      role: "user",
+      content: `[USER PERSONALITY] ${persona ? persona.person : ""}`,
     },
     {
       role: "system",
-      content: `[PERSONA] ${chat?.character.persona}`,
+      content: `[CHAR PERSONALITY] ${chat?.character.persona}`,
     },
     {
       role: "system",

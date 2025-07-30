@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/app/utils/prisma";
+import e from "cors";
 
 export const GET = async (
   request: Request,
@@ -13,6 +14,26 @@ export const GET = async (
       },
     });
     return NextResponse.json({ success: true, data: personas });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const POST = async (
+  req: Request,
+  { params }: { params: Promise<{ userId: string }> }
+) => {
+  const { userId } = await params;
+  const { personaName, persona } = await req.json();
+  try {
+    await db.userPersona.create({
+      data: {
+        userId,
+        name: personaName,
+        person: persona,
+      },
+    });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.log(error);
   }

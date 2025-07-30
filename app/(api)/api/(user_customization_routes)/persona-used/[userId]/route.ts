@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { db } from "@/app/utils/prisma";
 
 export const GET = async (request: Request, { params }: any) => {
   const { userId } = params;
@@ -8,7 +9,7 @@ export const GET = async (request: Request, { params }: any) => {
         id: userId,
       },
     });
-    NextResponse.json({ success: true, data: user?.personaUsed });
+    return NextResponse.json({ success: true, data: user?.personaUsed });
   } catch (error) {
     console.log(error);
   }

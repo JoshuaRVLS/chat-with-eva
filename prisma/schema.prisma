@@ -35,7 +35,7 @@ model UserPersona {
   name String
   person String
   user User @relation(fields: [userId], references: [id])
-  userId String @unique
+  userId String 
 }
 
 model UserProfileImage {

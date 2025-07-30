@@ -46,7 +46,7 @@ const History = () => {
       <div className="flex w-full gap-3 overflow-auto">
         {data.map((chat) => (
           <div
-            className="flex flex-col w-full md:max-w-56 lg:max-w-72 gap-1"
+            className="flex flex-col w-full min-w-full md:min-w-auto md:max-w-56 lg:max-w-72 gap-1"
             key={chat.id}
           >
             <Reveal>

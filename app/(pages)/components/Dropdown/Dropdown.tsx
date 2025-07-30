@@ -1,17 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { AnimatePresence, motion } from "motion/react";
 
 const Dropdown = ({
   label,
+  open,
   children,
 }: {
   label: string;
+  open?: boolean;
   children: React.ReactNode;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setIsOpen(open);
+    }
+  }, []);
 
   return (
     <div data-scroll className="w-full  border border-borders p-4">

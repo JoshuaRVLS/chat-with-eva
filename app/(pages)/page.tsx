@@ -9,7 +9,6 @@ import {
 import { CharactersData, ChatHistroy } from "@/@types/type";
 import { getServerSession, Session } from "next-auth";
 import { authOptions } from "../utils/auth";
-import PersonaModal from "./components/PersonaModal/PersonaModal";
 
 const HomePage = async () => {
   const queryClient = new QueryClient();
@@ -36,7 +35,6 @@ const HomePage = async () => {
       <HydrationBoundary state={dehydrate(queryClient)}>
         <History />
         <Characters />
-        <PersonaModal />
       </HydrationBoundary>
     </div>
   );
