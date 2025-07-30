@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import { db } from "@/app/utils/prisma";
 
-export const GET = async (request: Request, { params }: any) => {
-  const { userId } = params;
+export const GET = async (
+  request: Request,
+  { params }: { params: Promise<{ userId: string }> }
+) => {
+  const { userId } = await params;
   try {
     const user = await db?.user.findFirst({
       where: {
