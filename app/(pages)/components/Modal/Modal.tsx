@@ -1,4 +1,3 @@
-import { usePersonaModal } from "@/app/stores/usePersonaModal";
 import React, { useEffect, useRef } from "react";
 
 const Modal = ({
@@ -9,25 +8,6 @@ const Modal = ({
   hidden: boolean;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-
-  const { isOpen, setIsOpen } = usePersonaModal();
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "auto";
-      }
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
 
   return (
     <div
