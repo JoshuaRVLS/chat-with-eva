@@ -1,6 +1,5 @@
 import { db } from "@/app/utils/prisma";
 import { z } from "zod";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 
@@ -14,6 +13,8 @@ export const POST = async (req: Request) => {
     const { username, password } = await userSchema.parseAsync(
       await req.json()
     );
+
+    console.log(username, password);
     const user = await db.user.findFirst({
       where: {
         OR: [{ username }, { email: username }],

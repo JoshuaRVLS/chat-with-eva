@@ -45,7 +45,10 @@ const History = () => {
       </span>
       <div className="flex w-full gap-3 overflow-auto">
         {data.map((chat) => (
-          <div className="flex flex-col w-full gap-1" key={chat.id}>
+          <div
+            className="flex flex-col w-full md:max-w-56 lg:max-w-72 gap-1"
+            key={chat.id}
+          >
             <Reveal>
               <CharacterCard
                 className="history-card"

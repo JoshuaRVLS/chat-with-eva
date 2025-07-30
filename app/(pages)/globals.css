@@ -122,11 +122,11 @@ li {
 }
 
 .card {
-  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full lg:w-72 h-[30rem] justify-between;
+  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full md:w-56 lg:w-72 h-[30rem] justify-between;
 }
 
 .history-card {
-  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full min-w-72 h-[30rem] justify-between;
+  @apply transition hover:shadow-lg hover:ring-1 ring-borders cursor-pointer flex flex-col gap-2 border border-borders p-4 rounded-lg shadow overflow-scroll w-full md:min-w-56 lg:max-w-72 lg:min-w-72  h-[30rem] justify-between;
 }
 
 .create-character-container {
