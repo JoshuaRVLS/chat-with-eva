@@ -22,7 +22,7 @@ export const POST = async (req: Request) => {
 
     await db.character.upsert({
       where: {
-        id: characterId as string,
+        id: (characterId as string) || "",
       },
       create: {
         name: characterName as string,
