@@ -24,7 +24,8 @@ export default function LoginPage() {
       });
 
       if (!response?.ok) {
-        toast.error("Error");
+        toast.error((response?.error as string) || "Login Failed");
+        return;
       }
 
       toast.success("Login Success");

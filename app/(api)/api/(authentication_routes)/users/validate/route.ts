@@ -22,13 +22,13 @@ export const POST = async (req: Request) => {
     if (!user) {
       return NextResponse.json(
         { success: false, message: "User belum terdaftar" },
-        { status: 401 }
+        { status: 200 }
       );
     }
     if (!(await bcrypt.compare(password, user.password))) {
       return NextResponse.json(
         { success: false, message: "Password salah" },
-        { status: 401 }
+        { status: 200 }
       );
     }
 
