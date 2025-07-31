@@ -37,3 +37,26 @@ export const POST = async (
     console.log(error);
   }
 };
+
+export const PATCH = async (
+  req: Request,
+  { params }: { params: Promise<{ userId: string }> }
+) => {
+  const { userId } = await params;
+  const { personaName, persona, personaId } = await req.json();
+  try {
+    await db.userPersona.update({
+      where: {
+        id: personaId,
+      },
+      data: {
+        userId,
+        name: personaName,
+        person: persona,
+      },
+    });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.log(error);
+  }
+};
